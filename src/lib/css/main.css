@@ -1,0 +1,136 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Light.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Roboto";
+}
+
+:root {
+    background-color: #010101;
+    color: white;
+}
+
+html,
+body,
+.container {
+    height: 100%;
+}
+
+aside {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 70px;
+    border-right: 1px solid #444;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 7px;
+}
+
+aside a {
+    color: white;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 12px;
+    box-sizing: border-box;
+    text-decoration: none;
+    border-radius: 5px;
+    gap: 5px;
+}
+
+aside a[aria-current="page"] {
+    background-color: rgba(169, 169, 169, 0.23);
+}
+
+aside a svg {
+    font-size: 25px;
+    fill: white;
+    stroke: #333;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px calc(100% - 50px);
+    width: calc(100% - 70px);
+    height: 100%;
+    margin-left: 70px;
+}
+
+header {
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    box-sizing: border-box;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+}
+
+.calendar a {
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid #444;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+.calendar a:hover {
+    background-color: #121212;
+}
+
+.calendar .day {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #777;
+}
+
+.calendar .dayName {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #777;
+}
+
+.current {
+    background-color: #5941A9 !important;
+}
+
+.current .dayName {
+    color: rgba(255, 255, 255, 0.568) !important;
+}
+
+.current .day {
+    color: rgba(255, 255, 255, 0.568);
+}
