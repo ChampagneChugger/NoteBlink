@@ -9,7 +9,7 @@
 </script>
 
 {#each paths as { name, path, icon }}
-	{@const active = $page.route.id == path ? "page" : null}
+	{@const active = $page.url.pathname == path ? "page" : null}
 	<a href={path} aria-current={active}>
 		<Icon {icon} />
 		{name}
