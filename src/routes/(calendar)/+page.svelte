@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from "@iconify/svelte"
 	import { monthAndYear } from "$lib/stores/yearandmonth"
 
 	let notes: any[] = []
@@ -104,49 +105,39 @@
 	<div class="calendar">
 		{#each { length: calendar.days } as placeholder, index}
 			{@const amount = checkIfHasNote(index + 1)}
-			{#if calendar.year == currentYear && calendar.month == currentMonth && index + 1 == currentDay}
-				<a class="current" href="/{calendar.year}/{calendar.month}/{index + 1}">
-					<div class="day">{index + 1}</div>
-					<div class="dayName">
-						{getDayName(calendar.year, calendar.month, index + 1)}
-					</div>
-					<div class="dayNotes">
-						{amount}
-					</div>
-				</a>
-			{:else}
-				<a href="/{calendar.year}/{calendar.month}/{index + 1}">
-					<div class="day">{index + 1}</div>
-					<div class="dayName">
-						{getDayName(calendar.year, calendar.month, index + 1)}
-					</div>
-					<div class="dayNotes">
-						{amount}
-					</div>
-				</a>
-			{/if}
+			<a
+				class:current={calendar.year == currentYear &&
+					calendar.month == currentMonth &&
+					index + 1 == currentDay}
+				href="/{calendar.year}/{calendar.month}/{index + 1}"
+			>
+				<div class="day">{index + 1}</div>
+				<div class="dayName">
+					{getDayName(calendar.year, calendar.month, index + 1)}
+				</div>
+				<div class="dayNotes">
+					{#if amount > 0}
+						<Icon icon="material-symbols:note" />
+						<span>{amount}</span>
+					{/if}
+				</div>
+			</a>
 		{/each}
 	</div>
 {:else}
 	<div class="calendar">
 		{#each { length: calendar.days } as placeholder, index}
-			{#if calendar.year == currentYear && calendar.month == currentMonth && index + 1 == currentDay}
-				<a class="current" href="/{calendar.year}/{calendar.month}/{index + 1}">
-					<div class="day">{index + 1}</div>
-					<div class="dayName">
-						{getDayName(calendar.year, calendar.month, index + 1)}
-					</div>
-					<div class="dayNotes">0</div>
-				</a>
-			{:else}
-				<a href="/{calendar.year}/{calendar.month}/{index + 1}">
-					<div class="day">{index + 1}</div>
-					<div class="dayName">
-						{getDayName(calendar.year, calendar.month, index + 1)}
-					</div>
-					<div class="dayNotes">0</div>
-				</a>
-			{/if}
+			<a
+				class:current={calendar.year == currentYear &&
+					calendar.month == currentMonth &&
+					index + 1 == currentDay}
+				href="/{calendar.year}/{calendar.month}/{index + 1}"
+			>
+				<div class="day">{index + 1}</div>
+				<div class="dayName">
+					{getDayName(calendar.year, calendar.month, index + 1)}
+				</div>
+			</a>
 		{/each}
 	</div>
 {/if}
