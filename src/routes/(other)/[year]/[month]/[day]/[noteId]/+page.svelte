@@ -4,11 +4,13 @@
 	import Allnotes from "$lib/components/allnotes.svelte"
 	import Icon from "@iconify/svelte"
 	import type { Note } from "$lib/types/note"
-	import { tick } from "svelte"
+	import { marked } from "marked"
 
+	type State = "read" | "edit"
 	let note: Note
-	let editable: boolean = false
-	let contentElement: HTMLDivElement
+	let noteHTML: string
+	let noteMarkdown: string
+	let state: State = "read"
 
 	function getCurrentNote(year: number, month: number, day: number, noteID: number) {
 		const request = indexedDB.open("NoteBlink", 1)
@@ -35,6 +37,8 @@
 				})
 
 				note = notes[0]
+				noteHTML = marked.parse(note.content)
+				noteMarkdown = note.content
 
 				if (!note) {
 					window.location.href = "/error"
@@ -53,6 +57,10 @@
 		Number($page.params.day),
 		Number($page.params.noteId)
 	)
+
+	$: if (noteMarkdown) {
+		noteHTML = marked.parse(noteMarkdown)
+	}
 </script>
 
 <svelte:head>
@@ -61,28 +69,34 @@
 
 <Allnotes />
 <div class="notepagecontent">
-	<Breadcrumbs noteTitle={note?.title} />
-	<div class="noteActions">
-		<button
-			on:click={() => {
-				editable = false
-			}}
-		>
-			<Icon icon="ant-design:read-filled" />
-			<p>Read</p>
-		</button>
-		<button
-			on:click={async () => {
-				editable = true
-				await tick()
-				contentElement.focus()
-			}}
-		>
-			<Icon icon="material-symbols:edit" />
-			<p>Edit</p>
-		</button>
+	<div class="upper">
+		<Breadcrumbs noteTitle={note?.title} />
+		<div class="noteActions">
+			<button
+				on:click={() => {
+					state = "read"
+				}}
+			>
+				<Icon icon="ant-design:read-filled" />
+				<p>Read</p>
+			</button>
+			<button
+				on:click={async () => {
+					state = "edit"
+				}}
+			>
+				<Icon icon="material-symbols:edit" />
+				<p>Edit</p>
+			</button>
+		</div>
 	</div>
-	<div class="noteContent" contenteditable={editable} bind:this={contentElement}>
-		{note?.content}
-	</div>
+	{#if state == "read" && noteHTML}
+		<div class="content">
+			{@html noteHTML}
+		</div>
+	{:else}
+		<div class="content">
+			<textarea bind:value={noteMarkdown} />
+		</div>
+	{/if}
 </div>

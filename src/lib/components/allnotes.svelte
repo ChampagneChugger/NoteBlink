@@ -65,6 +65,8 @@
 			</a>
 		{/each}
 	{:else}
-		<p>No notes.</p>
+		<div class="center">
+			<p>No notes.</p>
+		</div>
 	{/if}
 </div>
