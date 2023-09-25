@@ -127,13 +127,13 @@
 </script>
 
 <svelte:head>
-	<title>NoteBlink - {note?.title}</title>
+	<title>NoteBlink - {noteTitle}</title>
 </svelte:head>
 
 <Allnotes />
 <div class="notepagecontent">
 	<div class="upper">
-		<Breadcrumbs noteTitle={note?.title} />
+		<Breadcrumbs {noteTitle} />
 		<div class="noteActions">
 			<button
 				on:click={() => {
