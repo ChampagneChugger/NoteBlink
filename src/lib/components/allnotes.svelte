@@ -4,6 +4,7 @@
 	import { tilt } from "$lib/actions/tilt"
 	import Icon from "@iconify/svelte"
 	import { refetchNotes } from "$lib/stores/refetchNotes"
+	import { refetchAllNotes } from "$lib/stores/refetchAllNotes"
 
 	let notes: any[] = []
 
@@ -110,6 +111,11 @@
 		notes = notes
 
 		$refetchNotes.state = false
+	}
+
+	$: if ($refetchAllNotes) {
+		getNotes(Number($page.params.year), Number($page.params.month), Number($page.params.day))
+		$refetchAllNotes = false
 	}
 </script>
 

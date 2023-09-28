@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte"
 	import { monthAndYear } from "$lib/stores/yearandmonth"
+	import { refetchAllNotes } from "$lib/stores/refetchAllNotes"
 
 	let notes: any[] = []
 
@@ -44,6 +45,11 @@
 			}
 		}
 	})
+
+	$: if ($refetchAllNotes) {
+		getMonthNotes(year, month)
+		$refetchAllNotes = false
+	}
 
 	$: calendar = getCalendar(year, month)
 	$: getMonthNotes(year, month)

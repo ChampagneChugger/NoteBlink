@@ -382,3 +382,25 @@ textarea {
     margin: 20px auto;
     font-size: 30px;
 }
+
+.upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    height: 200px;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 11px;
+    color: #999;
+    cursor: pointer;
+}
+
+.upload svg {
+    margin: 0px;
+    border: 1px solid #999;
+    padding: 10px;
+    border-radius: 50%;
+}
