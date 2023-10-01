@@ -6,8 +6,7 @@
 	const paths = [
 		{ name: "Home", path: "/", icon: "material-symbols:home", type: "link" },
 		{ name: "Import", path: "/import", icon: "mdi:import", type: "button" },
-		{ name: "Export", path: "/export", icon: "ph:export", type: "button" },
-		{ name: "Sync", path: "/sync", icon: "material-symbols:sync", type: "button" }
+		{ name: "Export", path: "/export", icon: "ph:export", type: "button" }
 	]
 
 	type popupType = "export" | "import" | "sync" | undefined
