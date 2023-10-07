@@ -31,15 +31,6 @@
 
 		$popup = popupEnum
 	}
-
-	async function githublogin() {
-		const res = await fetch("https://github.com/login/oauth/authorize", {
-			method: "GET",
-			headers: {
-				client_id: "105cd3b880703640ae15"
-			}
-		})
-	}
 </script>
 
 {#each paths as { name, path, icon, type }}
@@ -55,8 +46,4 @@
 			{name}
 		</button>
 	{/if}
-	<button on:click={githublogin}>
-		<Icon icon="mdi:github" />
-		Github
-	</button>
 {/each}
